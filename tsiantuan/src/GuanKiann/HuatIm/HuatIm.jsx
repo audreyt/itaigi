@@ -30,7 +30,7 @@ export default class HuatIm extends React.Component {
     <span className='HuatIm'>
       <audio id={'audio_' + id}>
         <source type='audio/mpeg'
-          src={'https://1763c5ee9859e0316ed6-db85b55a6a3fbe33f09b9245992383bd.ssl.cf1.rackcdn.com/'
+          src={'https://r2-assets.moedict.tw/audio/t/'
           + id + '.mp3'} />
       </audio>
       <button onClick={this.play.bind(this, 'audio_' + id)}
