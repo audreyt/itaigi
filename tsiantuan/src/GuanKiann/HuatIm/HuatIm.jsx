@@ -31,7 +31,7 @@ export default class HuatIm extends React.Component {
       <audio id={'audio_' + id}>
         <source type='audio/mpeg'
           src={'https://r2-assets.moedict.tw/audio/t/'
-          + id + '.mp3'} />
+          + id + '.mp3?v=sutian-20260901'} />
       </audio>
       <button onClick={this.play.bind(this, 'audio_' + id)}
         className='ui compact icon button' title='發音'>
