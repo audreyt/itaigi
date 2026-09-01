@@ -38,7 +38,7 @@ export default class HuatIm extends React.Component {
     el.addEventListener('error', this.onR2Error, true);
     let source = el.querySelector('source');
     if (source) source.addEventListener('error', this.onR2Error, true);
-    if (el.error || el.networkState === 3) {
+    if (el.error) {
       this.onR2Error();
     }
   }
