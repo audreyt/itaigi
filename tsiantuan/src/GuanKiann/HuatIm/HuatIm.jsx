@@ -9,10 +9,25 @@ var debug = Debug('itaigi:HuatIm');
 
 export default class HuatIm extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = { r2Failed: false };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.音標 !== this.props.音標) {
+      this.setState({ r2Failed: false });
+    }
+  }
+
   play(id) {
     let { hanji, 音標 } = this.props;
     document.getElementById(id).play();
     gaThiann(hanji, 音標);
+  }
+
+  onR2Error() {
+    this.setState({ r2Failed: true });
   }
 
   render() {
@@ -22,16 +37,19 @@ export default class HuatIm extends React.Component {
     }
 
     let id = SoundsMapping.map(音標);
-    if (id === undefined) {
+    if (id === undefined || this.state.r2Failed) {
       return <HapSing 音標={音標} hanji={hanji}/>;
     }
 
     return (
     <span className='HuatIm'>
-      <audio id={'audio_' + id}>
+      <audio id={'audio_' + id}
+        preload='metadata'
+        onError={this.onR2Error.bind(this)}>
         <source type='audio/mpeg'
           src={'https://r2-assets.moedict.tw/audio/t/'
-          + id + '.mp3?v=sutian-20260901'} />
+          + id + '.mp3?v=sutian-20260901'}
+          onError={this.onR2Error.bind(this)} />
       </audio>
       <button onClick={this.play.bind(this, 'audio_' + id)}
         className='ui compact icon button' title='發音'>
